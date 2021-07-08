@@ -41,27 +41,27 @@ describe('rn-versions/0.64', () => {
   //   resetGit(cwd);
   // });
 
-  test('change bundle id', () => {
-    run(cwd, `-b "com.test64.app"`);
+  // test('change bundle id', () => {
+  //   run(cwd, `-b "com.test64.app"`);
 
-    const result = getDiff(cwd);
+  //   const result = getDiff(cwd);
 
-    expect(result).toMatchSnapshot();
-  });
+  //   expect(result).toMatchSnapshot();
+  // });
 
-  test('change app name', () => {
-    run(cwd, `"New Test App"`);
+  // test('change app name', () => {
+  //   run(cwd, `"New Test App"`);
 
-    const result = getDiff(cwd);
+  //   const result = getDiff(cwd);
 
-    expect(result).toMatchSnapshot();
-  });
+  //   expect(result).toMatchSnapshot();
+  // });
 
-  test('change app name and bundle id', () => {
-    run(cwd, `"New Test App" -b "com.test64.app"`);
+  // test('change app name and bundle id', () => {
+  //   run(cwd, `"New Test App" -b "com.test64.app"`);
 
-    const result = getDiff(cwd);
+  //   const result = getDiff(cwd);
 
-    expect(result).toMatchSnapshot();
-  });
+  //   expect(result).toMatchSnapshot();
+  // });
 });
