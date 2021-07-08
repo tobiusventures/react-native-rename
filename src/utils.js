@@ -3,7 +3,7 @@ const path = require('path');
 const cheerio = require('cheerio');
 
 const devTestRNProject = ''; // For Development eg '/Users/junedomingo/Desktop/RN49'
-const __dirname = devTestRNProject || process.cwd();
+const cwd = devTestRNProject || process.cwd();
 
 function readFile(filePath) {
   return new Promise((resolve, reject) => {
@@ -14,10 +14,10 @@ function readFile(filePath) {
   });
 }
 
-const loadAppConfig = () => readFile(path.join(__dirname, 'app.json')).then(data => JSON.parse(data));
+const loadAppConfig = () => readFile(path.join(cwd, 'app.json')).then(data => JSON.parse(data));
 
 const loadAndroidManifest = () =>
-  readFile(path.join(__dirname, 'android/app/src/main/AndroidManifest.xml')).then(data => cheerio.load(data));
+  readFile(path.join(cwd, 'android/app/src/main/AndroidManifest.xml')).then(data => cheerio.load(data));
 
 function iosRequiredPaths(currentAppName) {
   const nS_CurrentAppName = currentAppName.replace(/\s/g, '');
@@ -26,7 +26,7 @@ function iosRequiredPaths(currentAppName) {
 }
 
 module.exports = {
-  __dirname,
+  cwd,
   loadAppConfig,
   loadAndroidManifest,
   iosRequiredPaths,

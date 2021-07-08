@@ -13,7 +13,7 @@ const path = require('path');
 const { foldersAndFiles } = require('./config/foldersAndFiles');
 const { filesToModifyContent } = require('./config/filesToModifyContent');
 const { bundleIdentifiers } = require('./config/bundleIdentifiers');
-const { loadAppConfig, loadAndroidManifest, __dirname, iosRequiredPaths } = require('./utils');
+const { loadAppConfig, loadAndroidManifest, cwd, iosRequiredPaths } = require('./utils');
 
 const androidEnvs = ['main', 'debug'];
 const projectName = pjson.name;
@@ -32,16 +32,16 @@ function replaceContent(regex, replacement, paths) {
   });
 
   for (const filePath of paths) {
-    console.log(`${filePath.replace(__dirname, '')} ${colors.green('MODIFIED')}`);
+    console.log(`${filePath.replace(cwd, '')} ${colors.green('MODIFIED')}`);
   }
 }
 
 const cleanBuilds = () => {
   const deleteDirectories = shell.rm('-rf', [
-    path.join(__dirname, 'ios/build/*'),
-    path.join(__dirname, 'android/.gradle/*'),
-    path.join(__dirname, 'android/app/build/*'),
-    path.join(__dirname, 'android/build/*'),
+    path.join(cwd, 'ios/build/*'),
+    path.join(cwd, 'android/.gradle/*'),
+    path.join(cwd, 'android/app/build/*'),
+    path.join(cwd, 'android/build/*'),
   ]);
 
   console.log('Done removing builds.'.green);
@@ -94,7 +94,7 @@ loadAppConfig()
             const paths = iosRequiredPaths(currentAppName);
 
             paths.forEach(item => {
-              if (!fs.existsSync(path.join(__dirname, item))) {
+              if (!fs.existsSync(path.join(cwd, item))) {
                 const warning = `Can't find an ios path or project. Make sure that the ios project path and property 'name' in app.json the same.`;
 
                 console.log(colors.red(warning));
@@ -111,8 +111,8 @@ loadAppConfig()
 
             const successMsg = `/${dest} ${colors.green('RENAMED')}`;
 
-            const src = path.join(__dirname, element);
-            const dst = path.join(__dirname, dest);
+            const src = path.join(cwd, element);
+            const dst = path.join(cwd, dest);
 
             const move = shell.mv('-f', src, dst);
 
@@ -139,8 +139,8 @@ loadAppConfig()
 
                 setTimeout(() => {
                   itemsProcessed++;
-                  if (fs.existsSync(path.join(__dirname, filePath))) {
-                    newPaths.push(path.join(__dirname, filePath));
+                  if (fs.existsSync(path.join(cwd, filePath))) {
+                    newPaths.push(path.join(cwd, filePath));
                     replaceContent(file.regex, file.replacement, newPaths);
                   }
                   if (itemsProcessed === filePathsCount) {
@@ -167,8 +167,8 @@ loadAppConfig()
                 filePath =>
                   new Promise(resolve => {
                     const newPaths = [];
-                    if (fs.existsSync(path.join(__dirname, filePath))) {
-                      newPaths.push(path.join(__dirname, filePath));
+                    if (fs.existsSync(path.join(cwd, filePath))) {
+                      newPaths.push(path.join(cwd, filePath));
                       replaceContent(file.regex, file.replacement, newPaths);
                     }
                     resolve();
@@ -201,8 +201,8 @@ loadAppConfig()
                     newBundlePath = `${javaFileBase}/${newBundlePath}`;
                   }
 
-                  const fullCurrentBundlePath = path.join(__dirname, currentJavaPath);
-                  const fullNewBundlePath = path.join(__dirname, newBundlePath);
+                  const fullCurrentBundlePath = path.join(cwd, currentJavaPath);
+                  const fullNewBundlePath = path.join(cwd, newBundlePath);
 
                   shell.mkdir('-p', fullNewBundlePath);
 
@@ -251,7 +251,7 @@ loadAppConfig()
             .then(cleanBuilds)
             .then(() => console.log(`APP SUCCESSFULLY RENAMED TO "${newName}"! 🎉 🎉 🎉`.green))
             .then(() => {
-              if (fs.existsSync(path.join(__dirname, 'ios', 'Podfile'))) {
+              if (fs.existsSync(path.join(cwd, 'ios', 'Podfile'))) {
                 console.log(
                   `${colors.yellow('Podfile has been modified, please run "pod install" inside ios directory.')}`
                 );
