@@ -2,18 +2,18 @@
   "name": "react-native-rename",
   "version": "2.9.0",
   "description": "Rename react-native app with just one command",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "build": "babel src --out-dir lib",
-    "prepublish": "npm run build",
-    "relink": "npm unlink && npm run prepublish && npm link",
-    "format": "prettier --write '**/*.{js,jsx}'",
-    "lint": "eslint '**/*.{js,jsx}'",
-    "react-native-rename": "babel-node src/index.js",
-    "precommit": "lint-staged"
+    "xbuild": "babel src --out-dir lib",
+    "xprepublish": "npm run build",
+    "xrelink": "npm unlink && npm run prepublish && npm link",
+    "xformat": "prettier --write '**/*.{js,jsx}'",
+    "xlint": "eslint '**/*.{js,jsx}'",
+    "xreact-native-rename": "babel-node src/index.js",
+    "xprecommit": "lint-staged"
   },
-  "lint-staged": {
+  "xlint-staged": {
     "**/*.js": [
       "format",
       "lint --fix",
@@ -36,7 +36,7 @@
   "author": "June Domingo <junedomingo@gmail.com>",
   "license": "MIT",
   "bin": {
-    "react-native-rename": "lib/index.js"
+    "react-native-rename": "src/index.js"
   },
   "bugs": {
     "url": "https://github.com/junedomingo/react-native-rename/issues"
