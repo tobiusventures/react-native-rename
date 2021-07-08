@@ -237,9 +237,9 @@ loadAppConfig()
             });
           });
 
-        const gitUpdateChanges = () => {
-          shell.exec(`git add . `);
-        };
+        // const gitUpdateChanges = () => {
+        //   shell.exec(`git add . `);
+        // };
 
         const run = () =>
           Promise.resolve()
@@ -247,7 +247,7 @@ loadAppConfig()
             .then(resolveFoldersAndFiles)
             .then(resolveFilesToModifyContent)
             .then(resolveJavaFiles)
-            .then(gitUpdateChanges)
+            // .then(gitUpdateChanges)
             .then(cleanBuilds)
             .then(() => console.log(`APP SUCCESSFULLY RENAMED TO "${newName}"! 🎉 🎉 🎉`.green))
             .then(() => {

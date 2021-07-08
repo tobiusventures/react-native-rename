@@ -10,36 +10,36 @@ const run = (cwd, args) => {
   });
 }
 
-const getDiff = (cwd) => {
-  const diff = shell.exec(`git diff --staged`, {
-    cwd,
-    silent: true
-  });
+// const getDiff = (cwd) => {
+//   const diff = shell.exec(`git diff --staged`, {
+//     cwd,
+//     silent: true
+//   });
+//
+//   return diff.stdout;
+// }
 
-  return diff.stdout;
-}
-
-const resetGit = (cwd) => {
-  shell.exec(`git reset -q HEAD -- .`, {
-    cwd,
-    silent: true
-  });
-  shell.exec(`git clean -f -q -- .`, {
-    cwd,
-    silent: true
-  });
-  shell.exec(`git checkout -q -- .`, {
-    cwd,
-    silent: true
-  });
-}
+// const resetGit = (cwd) => {
+//   shell.exec(`git reset -q HEAD -- .`, {
+//     cwd,
+//     silent: true
+//   });
+//   shell.exec(`git clean -f -q -- .`, {
+//     cwd,
+//     silent: true
+//   });
+//   shell.exec(`git checkout -q -- .`, {
+//     cwd,
+//     silent: true
+//   });
+// }
 
 describe('rn-versions/0.64', () => {
   const cwd = path.join(__dirname, 'rn-versions/0.64');
 
-  afterEach(() => {
-    resetGit(cwd);
-  });
+  // afterEach(() => {
+  //   resetGit(cwd);
+  // });
 
   test('change bundle id', () => {
     run(cwd, `-b "com.test64.app"`);
