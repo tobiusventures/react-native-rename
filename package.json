@@ -4,7 +4,6 @@
   "description": "Rename react-native app with just one command",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
     "xbuild": "babel src --out-dir lib",
     "xprepublish": "npm run build",
     "xrelink": "npm unlink && npm run prepublish && npm link",
