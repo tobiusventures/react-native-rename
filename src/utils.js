@@ -1,9 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import cheerio from 'cheerio';
+const fs = require('fs');
+const path = require('path');
+const cheerio = require('cheerio');
 
 const devTestRNProject = ''; // For Development eg '/Users/junedomingo/Desktop/RN49'
-export const __dirname = devTestRNProject || process.cwd();
+const __dirname = devTestRNProject || process.cwd();
 
 function readFile(filePath) {
   return new Promise((resolve, reject) => {
@@ -14,13 +14,20 @@ function readFile(filePath) {
   });
 }
 
-export const loadAppConfig = () => readFile(path.join(__dirname, 'app.json')).then(data => JSON.parse(data));
+const loadAppConfig = () => readFile(path.join(__dirname, 'app.json')).then(data => JSON.parse(data));
 
-export const loadAndroidManifest = () =>
+const loadAndroidManifest = () =>
   readFile(path.join(__dirname, 'android/app/src/main/AndroidManifest.xml')).then(data => cheerio.load(data));
 
-export function iosRequiredPaths(currentAppName) {
+function iosRequiredPaths(currentAppName) {
   const nS_CurrentAppName = currentAppName.replace(/\s/g, '');
 
   return [`ios/${nS_CurrentAppName}`];
 }
+
+module.exports = {
+  __dirname,
+  loadAppConfig,
+  loadAndroidManifest,
+  iosRequiredPaths,
+};

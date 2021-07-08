@@ -3,17 +3,17 @@
 // nS - No Space
 // lC - Lowercase
 
-import colors from 'colors';
-import fs from 'fs';
-import program from 'commander';
-import replace from 'node-replace';
-import shell from 'shelljs';
-import pjson from '../package.json';
-import path from 'path';
-import { foldersAndFiles } from './config/foldersAndFiles';
-import { filesToModifyContent } from './config/filesToModifyContent';
-import { bundleIdentifiers } from './config/bundleIdentifiers';
-import { loadAppConfig, loadAndroidManifest, __dirname, iosRequiredPaths } from './utils';
+const colors = require('colors');
+const fs = require('fs');
+const program = require('commander');
+const replace = require('node-replace');
+const shell = require('shelljs');
+const pjson = require('../package.json');
+const path = require('path');
+const { foldersAndFiles } = require('./config/foldersAndFiles');
+const { filesToModifyContent } = require('./config/filesToModifyContent');
+const { bundleIdentifiers } = require('./config/bundleIdentifiers');
+const { loadAppConfig, loadAndroidManifest, __dirname, iosRequiredPaths } = require('./utils');
 
 const androidEnvs = ['main', 'debug'];
 const projectName = pjson.name;

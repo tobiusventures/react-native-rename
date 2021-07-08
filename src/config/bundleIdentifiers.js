@@ -1,8 +1,8 @@
 // nS - No Space
 // lC - Lowercase
-import globby from 'globby';
+const globby = require('globby');
 
-export function bundleIdentifiers({ currentAppName, newName, currentBundleID, newBundleID, newBundlePath }) {
+function bundleIdentifiers({ currentAppName, newName, currentBundleID, newBundleID, newBundlePath }) {
   const nS_CurrentAppName = currentAppName.replace(/\s/g, '');
   const nS_NewName = newName.replace(/\s/g, '');
 
@@ -33,3 +33,5 @@ export function bundleIdentifiers({ currentAppName, newName, currentBundleID, ne
     },
   ];
 }
+
+module.exports = bundleIdentifiers;
